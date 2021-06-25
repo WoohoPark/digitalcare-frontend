@@ -1,26 +1,19 @@
 import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
+import { AsyncStorage } from 'AsyncStorage';
 import RNKakaoLogins from 'react-native-kakao-logins';
-import { StyleSheet, Text, View, TouchableOpacity, Button, Alert } from 'react-native';
 
-const kakaoLogin = () => {
-    RNKakaoLogins.login((err, result) => {
-        if (err) {
-            Alert.alert('login error', err.toString());
-            return "99";
-        } else {
-            Alert.alert('token', JSON.stringify(result));
-            navigation.navigate('Main');
-            return "00";
-        }
-    });
-};
+const Login = ({ navigation }) => {
 
-const Intro = ({ navigation }) => {
+    //const isFocused = navigation.isFocused();
+
+    //Alert.alert(isFocused);
+
     return (
         <View style={styles.container}>
             <View style={styles.appIconBox}>
                 <Text>
-                    인트로
+                    로그인
                 </Text>
             </View>
             <View style={styles.appLoginBox}>
@@ -32,9 +25,10 @@ const Intro = ({ navigation }) => {
                                 return "99";
                             } else {
                                 Alert.alert('token', JSON.stringify(result));
-                                navigation.navigate('Main');
+                                AsyncStorage.setItem('isLogin', true);
+                                navigation.navigate('Welcome');
                             }
-                        });
+                        })
                     }}
                     title="카카오 로그인"
                     style={styles.kakaoLoginBtn}>
@@ -71,4 +65,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Intro;
+export default Login;

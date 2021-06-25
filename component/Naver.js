@@ -6,7 +6,7 @@ const Kakao = () => {
     <View style={styles.container}>
         <View style={styles.topLine}>
             <Text>
-                카카오
+                메인
             </Text>
         </View>
         <View style={styles.middleLine}>
@@ -23,6 +23,7 @@ const Kakao = () => {
             </TouchableOpacity>
         </View>
         <View style={styles.bottomLine}>
+            <BottomTab />
         </View>
     </View>
 };
