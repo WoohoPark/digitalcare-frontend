@@ -1,35 +1,13 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import RNKakaoLogins from 'react-native-kakao-logins';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Naver from '../component/Naver';
-import Kakao from '../component/Kakao';
-import Welcome from '../component/Welcome';
-
-
-function HomeScreen() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Home!</Text>
-        </View>
-    );
-}
-
-function SettingsScreen() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Settings!</Text>
-        </View>
-    );
-}
-
-function LogOutScreen() {
+const My = ({ navigation }) => {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate('login');
+                    navigation.navigate('Login');
                     RNKakaoLogins.logout((err, result) => {
                         if (err) {
                             Alert.alert('error', err.toString);
@@ -42,28 +20,25 @@ function LogOutScreen() {
                 style={styles.kakaoLoginBtn}>
                 <Text style={styles.kakaoLoginText}>카카오 로그아웃</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate('Login');
+                }}
+                title="카카오 로그아웃"
+                style={styles.kakaoLoginBtn}>
+                <Text style={styles.kakaoLoginText}>이동잏</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate('Home');
+                }}
+                title="카카오 로그아웃"
+                style={styles.kakaoLoginBtn}>
+                <Text style={styles.kakaoLoginText}>바텀에서 집으로가야쥬</Text>
+            </TouchableOpacity>
         </View>
     );
 }
-
-
-const Tab = createBottomTabNavigator();
-
-const BottomTab = () => {
-    return (
-        <Tab.Navigator
-            tabBarOptions={{
-                activeTintColor: '#e91e63',
-            }}>
-            <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-            <Tab.Screen name="LogOutScreen" component={LogOutScreen} />
-        </Tab.Navigator>
-
-    );
-}
-
-export default BottomTab;
 
 const styles = StyleSheet.create({
     container: {
@@ -88,3 +63,5 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     }
 });
+
+export default My;
