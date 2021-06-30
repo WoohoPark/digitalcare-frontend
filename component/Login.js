@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
 import { AsyncStorage } from 'AsyncStorage';
 import RNKakaoLogins from 'react-native-kakao-logins';
-import TabNavigator from '../navigation/TabNavigator';
+import HomeNavigator from '../navigation/HomeNavigator';
 
 const Login = ({ navigation }) => {
 
-    const [_isLogin2, setisLogin2] = useState(false);
+    const [_isLogin2, setisLogin2] = useState(true);
 
     return (
         <>
             {_isLogin2 ?
-                <TabNavigator />
+                <HomeNavigator />
                 :
                 <View style={styles.container}>
                     <View style={styles.appIconBox}>
@@ -29,7 +29,7 @@ const Login = ({ navigation }) => {
                                     } else {
                                         Alert.alert('token', JSON.stringify(result));
                                         AsyncStorage.setItem('isLogin', true);
-                                        navigation.navigate('TabNavigator');
+                                        navigation.navigate('HomeNavigator');
                                     }
                                 })
                             }}
