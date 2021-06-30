@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
 import { AsyncStorage } from 'AsyncStorage';
 import RNKakaoLogins from 'react-native-kakao-logins';
-import TabNavigator from '../../TabNavigator';
+import TabNavigator from '../navigation/TabNavigator';
 
 const Login = ({ navigation }) => {
 
-    const [_isLogin2, setisLogin2] = useState(true);
+    const [_isLogin2, setisLogin2] = useState(false);
 
     return (
         <>
