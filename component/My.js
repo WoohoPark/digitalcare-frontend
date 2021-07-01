@@ -21,11 +21,11 @@ const My = ({navigation}) => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('Login');
+          navigation.navigate('MapNavigator');
         }}
         title="카카오 로그아웃"
         style={styles.kakaoLoginBtn}>
-        <Text style={styles.kakaoLoginText}>이동잏</Text>
+        <Text style={styles.kakaoLoginText}> 맵으로 이동잏</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
