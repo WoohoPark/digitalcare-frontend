@@ -1,39 +1,128 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  PermissionsAndroid,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+import NaverMapView, {
+  Circle,
+  Marker,
+  Path,
+  Polyline,
+  Polygon,
+  Align,
+} from '../map';
 
-const MapDetail = ({ navigation }) => {
-    return (
-        <View style={styles.container}>
-            <View style={styles.topLine}>
-                <Text>
-                    맵 그리기
-                </Text>
-            </View>
-            <View style={styles.middleLine}>
-                <Text>여기다 그려요</Text>
-            </View>
-            <View style={styles.bottomLine}>
-            </View>
-        </View>
+async function requestLocationPermission() {
+  if (Platform.OS !== 'android') return;
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: 'Location Permission',
+        message: 'show my location need Location permission',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      },
     );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log('You can use the location');
+    } else {
+      console.log('Location permission denied');
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+}
+
+const P0 = {latitude: 37.564362, longitude: 126.977011};
+const P1 = {latitude: 37.565051, longitude: 126.978567};
+const P2 = {latitude: 37.565383, longitude: 126.976292};
+const P4 = {latitude: 37.564834, longitude: 126.977218};
+
+const MapDetail = ({navigation}) => {
+  useEffect(() => {
+    requestLocationPermission();
+  }, []);
+
+  return (
+    <>
+      <NaverMapView
+        style={{width: '100%', height: '100%'}}
+        showsMyLocationButton={true}
+        center={{...P0, zoom: 16}}
+        onTouch={e => console.warn('onTouch', JSON.stringify(e.nativeEvent))}
+        onCameraChange={e => console.warn('onCameraChange', JSON.stringify(e))}
+        onMapClick={e => console.warn('onMapClick', JSON.stringify(e))}
+        useTextureView>
+        {/*<Marker
+          coordinate={P0}
+          onClick={() => console.warn('onClick! p0')}
+          caption={{text: 'test caption', align: Align.Left}}
+        />*/}
+
+        <Marker
+          coordinate={P4}
+          onClick={() => console.warn('onClick! p4')}
+          image={require('./marker.png')}
+          width={50}
+          height={50}
+        />
+        <Path
+          coordinates={[P0, P1]}
+          onClick={() => console.warn('onClick! path')}
+          width={10}
+        />
+        <Polyline
+          coordinates={[P1, P2]}
+          onClick={() => console.warn('onClick! polyline')}
+        />
+        {/*<Circle
+          coordinate={P0}
+          color={'rgba(255,0,0,0.3)'}
+          radius={200}
+          onClick={() => console.warn('onClick! circle')}
+        />*/}
+        <Polygon
+          coordinates={[P0, P1, P2]}
+          color={`rgba(0, 0, 0, 0.5)`}
+          onClick={() => console.warn('onClick! polygon')}
+        />
+      </NaverMapView>
+      <Text
+        style={{
+          position: 'absolute',
+          top: '95%',
+          width: '100%',
+          textAlign: 'center',
+        }}>
+        Icon made by Pixel perfect from www.flaticon.com
+      </Text>
+    </>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    topLine: {
-        flex: 1,
-        backgroundColor: "pink",
-    },
-    middleLine: {
-        flex: 12,
-        backgroundColor: "purple",
-    },
-    bottomLine: {
-        flex: 1,
-        backgroundColor: "white",
-    }
+  container: {
+    flex: 1,
+  },
+  topLine: {
+    flex: 1,
+    backgroundColor: 'pink',
+  },
+  middleLine: {
+    flex: 12,
+    backgroundColor: 'purple',
+  },
+  bottomLine: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
 });
 
 export default MapDetail;
