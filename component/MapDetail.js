@@ -69,7 +69,6 @@ const MapDetail = ({navigation}) => {
         <Marker
           coordinate={P4}
           onClick={() => console.warn('onClick! p4')}
-          image={require('./marker.png')}
           width={50}
           height={50}
         />

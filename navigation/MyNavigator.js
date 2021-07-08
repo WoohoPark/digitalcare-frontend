@@ -1,14 +1,13 @@
 import * as React from 'react';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
-import Home from '../component/Home';
-import Intro from '../component/Intro';
+import My from '../component/My';
 
 const Stack = createStackNavigator();
 
-const HomeNavigator = () => {
+const MyNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="My"
       screenOptions={{
         headerShown: false,
         gestureEnabled: true,
@@ -16,10 +15,9 @@ const HomeNavigator = () => {
         ...TransitionPresets.DefaultTransition,
       }}
       mode="modal">
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Intro" component={Intro} />
+      <Stack.Screen name="My" component={My} />
     </Stack.Navigator>
   );
 };
 
-export default HomeNavigator;
+export default MyNavigator;
