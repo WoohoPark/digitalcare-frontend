@@ -1,10 +1,11 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import {
   Text,
   View,
   StyleSheet,
   TouchableOpacity,
   Alert,
+  BackHandler,
   Image,
 } from 'react-native';
 
@@ -13,6 +14,26 @@ import HeaderMenu from './HeaderMenu';
 import MainContainer from './MainContainer';
 
 const Home = ({navigation}) => {
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert('Hold on!', '앱을 종료하시겠습니까?', [
+        {
+          text: '취소',
+          onPress: () => null,
+        },
+        {text: '확인', onPress: () => BackHandler.exitApp()},
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Header />

@@ -13,8 +13,7 @@ const RootNavigator = ({navigation}) => {
       initialRouteName="Home"
       tabBarOptions={{
         activeTintColor: '#e91e63',
-      }}
-    >
+      }}>
       <Tab.Screen name="홈" component={HomeNavigator} />
       <Tab.Screen name="TopNavigator" component={TopNavigator} />
       <Tab.Screen name="네이버지도샘플" component={MapNavigator} />

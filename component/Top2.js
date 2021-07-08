@@ -1,31 +1,16 @@
 import * as React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Alert} from 'react-native';
-import RNKakaoLogins from 'react-native-kakao-logins';
 
 const Top2 = ({navigation}) => {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('Login');
-          RNKakaoLogins.logout((err, result) => {
-            if (err) {
-              Alert.alert('error', err.toString);
-            }
-            console.log(`${result}`);
-          });
+          navigation.navigate('My');
         }}
         title="카카오 로그아웃"
         style={styles.kakaoLoginBtn}>
-        <Text style={styles.kakaoLoginText}>카카오 로그아웃</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('MapNavigator');
-        }}
-        title="카카오 로그아웃"
-        style={styles.kakaoLoginBtn}>
-        <Text style={styles.kakaoLoginText}> Top2Top2Top2Top2Top2</Text>
+        <Text style={styles.kakaoLoginText}>테스트용 마이</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
@@ -33,7 +18,15 @@ const Top2 = ({navigation}) => {
         }}
         title="카카오 로그아웃"
         style={styles.kakaoLoginBtn}>
-        <Text style={styles.kakaoLoginText}>바텀에서 집으로가야쥬</Text>
+        <Text style={styles.kakaoLoginText}> Top2Top2Top2Top2Top2</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Login');
+        }}
+        title="카카오 로그아웃"
+        style={styles.kakaoLoginBtn}>
+        <Text style={styles.kakaoLoginText}>로그인으로가자</Text>
       </TouchableOpacity>
     </View>
   );
